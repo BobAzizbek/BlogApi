@@ -1,0 +1,9 @@
+global using blogapi.Data;
+global using blogapi.Models;
+global using blogapi.Mapper;
+global using blogapi.Entities;
+global using blogapi.Services;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
+global using System.ComponentModel.DataAnnotations;
+global using System.ComponentModel.DataAnnotations.Schema;
