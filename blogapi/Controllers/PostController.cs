@@ -101,4 +101,9 @@ public class PostController : ControllerBase
         }
         return BadRequest();
     }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public async Task<IActionResult> DeleteAsync(Guid id)
+        => Ok(await _postS.DeleteAsync(id));
 }
