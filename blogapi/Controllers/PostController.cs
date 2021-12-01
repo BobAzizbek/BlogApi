@@ -72,7 +72,33 @@ public class PostController : ControllerBase
     [HttpGet]
     [Route("{id}")]
     public async Task<IActionResult> GetAsync(Guid id)
-        => Ok(await _postS.GetAsync(id));
+    {
+        var post = await _postS.GetAsync(id);
+        return Ok(new
+        {
+            Id = post.Id,
+            HeaderImageId = post.HeaderImageId,
+            Title = post.Title,
+            Description = post.Description,
+            Content = post.Content,
+            Viewed = post.Viewed,
+            CreatedAt = post.CreatedAt,
+            ModifiedAt = post.ModifiedAt,
+            Comments = post.Comments.Select(c => new
+            {
+                Id = c.Id,
+                Author = c.Author,
+                Content = c.Content,
+                State = c.State,
+                PostId = c.PostId
+            }),
+            Medias = post.Medias.Select(m => new
+            {
+                Id = m.Id,
+                ContentType = m.ContentType,
+            })
+        });
+    }
 
     [HttpPut]
     [Route("{id}")]
