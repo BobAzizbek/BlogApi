@@ -22,23 +22,17 @@ public class MediaController : ControllerBase
         }).ToList();
 
         var result = await _mediaService.InsertAsync(images);
-        if (result.IsSuccess)
-        {
-            return Ok();
-        }
-        return BadRequest();
-    }
-    [HttpGet]
-    public async Task<IActionResult> GetAsync()
-    {
-        var medias = await _mediaService.GetAllAsync();
-        var json = medias.Select(m => new
+
+        var json = result.Media.Select(m => new
         {
             Id = m.Id,
             ContentType = m.ContentType
         });
-
-        return Ok(json);
+        if (result.IsSuccess)
+        {
+            return Ok(json);
+        }
+        return BadRequest();
     }
 
     [HttpGet]

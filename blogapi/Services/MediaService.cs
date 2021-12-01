@@ -63,20 +63,21 @@ public class MediaService : IMediaService
     public Task<Media> GetAsync(Guid id)
         => _context.Medias.FirstOrDefaultAsync(m => m.Id == id);
 
-    public async Task<(bool IsSuccess, Exception Exception)> InsertAsync(List<Media> media)
+    public async Task<(bool IsSuccess, Exception Exception, List<Media> Media)> InsertAsync(List<Media> medias)
     {
         try
         {
-            await _context.Medias.AddRangeAsync(media);
+            await _context.Medias.AddRangeAsync(medias);
             await _context.SaveChangesAsync();
 
             _logger.LogInformation($"Medias created in DB.");
-            return (true, null);
+
+            return (true, null, medias);
         }
         catch (Exception e)
         {
             _logger.LogInformation($"Creating medias in DB failed.\nError:{e.Message}, e");
-            return (false, e);
+            return (false, e, null);
         }
     }
 }

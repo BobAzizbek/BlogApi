@@ -6,6 +6,6 @@ public interface IMediaService
     Task<Media> GetAsync(Guid id);
     Task<List<Media>> GetAllAsync();
     Task<List<Media>> GetAllAsync(IEnumerable<Guid> id);
-    Task<(bool IsSuccess, Exception Exception)> InsertAsync(List<Media> media);
+    Task<(bool IsSuccess, Exception Exception, List<Media> Media)> InsertAsync(List<Media> media);
     Task<(bool IsSuccess, Exception Exception)> DeleteAsync(Guid id);
 }

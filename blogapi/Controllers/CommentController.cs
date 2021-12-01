@@ -35,15 +35,6 @@ public class CommentController : ControllerBase
         return BadRequest();
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAsync()
-        => Ok(await _commentS.GetAllAsync());
-
-    [HttpGet]
-    [Route("{id}")]
-    public async Task<IActionResult> GetAsync(Guid id)
-        => Ok(await _commentS.GetAsync(id));
-
     [HttpPut]
     [Route("{id}")]
     public async Task<IActionResult> PutAsync([FromRoute] Guid id, CommentModel comment)
