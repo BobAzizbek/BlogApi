@@ -21,6 +21,7 @@ public class CommentController : ControllerBase
         var entity = comment.ToEntity();
 
         var post = await _postS.GetAsync(entity.PostId);
+
         post.Comments.Append(entity);
         await _postS.UpdateAsync(post);
 

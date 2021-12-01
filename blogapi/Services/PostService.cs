@@ -21,6 +21,14 @@ public class PostService : IPostService
         try
         {
             _context.Posts.Remove(post);
+            foreach (var media in post.Medias)
+            {
+                _context.Medias.Remove(media);
+            }
+            foreach (var comment in post.Comments)
+            {
+                _context.Comments.Remove(comment);
+            }
             await _context.SaveChangesAsync();
 
             _logger.LogInformation($"Post deleted in DB. ID: {post.Id}");
