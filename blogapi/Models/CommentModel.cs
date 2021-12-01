@@ -7,5 +7,5 @@ public class CommentModel
 
     public Models.ECommentState State { get; set; }
 
-    public Guid Id { get; set; }
+    public Guid PostId { get; set; }
 }

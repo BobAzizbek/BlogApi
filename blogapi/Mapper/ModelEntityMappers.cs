@@ -11,4 +11,19 @@ public static class ModelEntityMappers
             comments: null,
             medias: null);
     }
+    public static Comment ToEntity(this CommentModel comment)
+        => new Comment(
+            author: comment.Author,
+            content: comment.Content,
+            state: comment.State.ToModelEntityECommentState(),
+            postId: comment.PostId
+        );
+
+    public static Entities.ECommentState ToModelEntityECommentState(this Models.ECommentState state)
+        => state switch
+        {
+            Models.ECommentState.Approved => Entities.ECommentState.Approved,
+            Models.ECommentState.Pending => Entities.ECommentState.Pending,
+            Models.ECommentState.Rejected => Entities.ECommentState.Rejected
+        };
 }
